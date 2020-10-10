@@ -6,12 +6,12 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 15:02:50 by aulopez           #+#    #+#             */
-/*   Updated: 2019/08/06 12:21:56 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/10 15:55:08 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
-#include "libft.h"
+#include "minilibft.h"
 
 char	*ft_strncpy(char *s1, const char *s2, size_t n)
 {

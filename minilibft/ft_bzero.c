@@ -6,11 +6,11 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 16:01:26 by aulopez           #+#    #+#             */
-/*   Updated: 2019/06/30 10:26:21 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/10 15:54:15 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minilibft.h"
 
 void	ft_bzero(void *s, size_t n)
 {

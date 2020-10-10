@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:11:22 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/10 14:31:49 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/10 15:52:40 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ static t_metahead	*metahead_find(const t_metadata *start,
 t_metabody		*metabody_get(const size_t size)
 {
 	t_metahead	*head;
-	t_metabody	*body;
 	t_metadata	*data;
 	size_t		index;
 

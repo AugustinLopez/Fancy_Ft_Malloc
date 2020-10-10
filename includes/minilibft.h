@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:37:09 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/10 15:27:21 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/10 15:56:47 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,8 @@ char				*ft_pathjoin(char const *s1, char const *s2);
 char				*ft_strchr(const char *s, int c);
 size_t				ft_strchri(const char *s, int c);
 size_t				ft_strlen(const char *s);
+char				*ft_strnew(size_t size);
+size_t				ft_wstrlen(unsigned *str);
+size_t				ft_wcharlen(unsigned wc);
 
 #endif

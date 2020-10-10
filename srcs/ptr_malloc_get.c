@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 01:08:55 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/10 14:47:28 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/10 15:52:26 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ ssize_t	free_get(t_metabody *body)
 
 void	size_set(t_metabody *body, const size_t size, const size_t i)
 {
-	t_metahead	*head;
-
 	if (body->id == Z4)
 	{
 		(body->size)[i / 2] &= 0xf0 >> (4 * (i % 2));
@@ -87,7 +85,6 @@ void	head_set(t_metabody *body)
 
 void	*ptr_get(t_metabody *body, const size_t size)
 {
-	void	*ret;
 	ssize_t	i;
 
 	if (body->id == Z12)

@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/19 09:24:15 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/10 15:55:00 by aulopez          ###   ########.fr       */
+/*   Created: 2020/10/09 17:51:21 by aulopez           #+#    #+#             */
+/*   Updated: 2020/10/10 16:09:51 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "malloc.h"
 #include "minilibft.h"
-#include <string.h>
-#include <stdlib.h>
 
-char			*ft_strjoin(char const *s1, char const *s2)
+int main(void)
 {
-	char	*pc;
-	size_t	n1;
-	size_t	n2;
+	size_t	i;
+	size_t	j;
+	void	*m[500];
 
-	n1 = s1 ? ft_strlen(s1) : 0;
-	n2 = s2 ? ft_strlen(s2) : 0;
-	if (n1 + n2 == 0)
-		return (0);
-	if (!(pc = (char *)malloc(sizeof(char) * (n1 + n2 + 1))))
-		return (0);
-	ft_strncpy(pc, s1, n1);
-	ft_strncpy(pc + n1, s2, n2);
-	pc[n1 + n2] = 0;
-	return (pc);
+	i = 0;
+	j = 0;
+	while (i < 14)
+	{
+		m[i++] = mono_malloc(4097);
+		ft_memset(m[i - 1], 0xff, 4096 * 2);
+	}
+	i = 0;
+	while (i < 300)
+		m[i++] = mono_malloc(16);
+	while (j < i)
+	{
+		ft_printf("%3zu. %p\n", j, m[j]);
+		j++;
+	}
+	return (0);
 }

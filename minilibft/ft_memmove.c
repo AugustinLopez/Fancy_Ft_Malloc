@@ -6,12 +6,12 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 11:33:47 by aulopez           #+#    #+#             */
-/*   Updated: 2019/08/06 12:21:47 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/10 15:54:40 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
-#include "libft.h"
+#include "minilibft.h"
 
 /*
 ** Basic implementation
