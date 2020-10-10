@@ -6,21 +6,19 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 17:51:21 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/10 16:05:43 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/10 19:28:41 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 #include <pthread.h>
-
-
-#include <stdio.h>
+#include "minilibft.h"
 
 void	*mono_malloc(size_t size)
 {
 	void		*ret;
 	t_metabody	*body;
-//	static size_t	j = 0;
+	//static size_t	j = 0;
 
 	if (size == 0)
 		return (NULL);
@@ -30,7 +28,7 @@ void	*mono_malloc(size_t size)
 	ret = ptr_get(body, size);
 	if (ret == NULL)
 		return (NULL);
-	//printf("%3zu. %p %p\n", j++, (void *)body, ret);
+	//ft_printf("%3zu. %p %p\n", j++, (void *)body, ret);
 	return (ret);
 }
 
