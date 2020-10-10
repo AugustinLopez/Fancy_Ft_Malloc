@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:59:43 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/09 21:43:21 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/10 14:30:10 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@
 
 # define AVAILABLE 15
 
+# define MAX_Z4 32
+# define MAX_OTHER 16
+
 /*
 ** You don't need as much metadata for a large allocation, but I'm not
 ** interested in implementing it: it is merely an extension of my model,
@@ -55,7 +58,7 @@ typedef struct			s_metahead
 	void				*l_protect;
 	size_t				available_heap;
 	uint16_t			id[AVAILABLE];
-	uint64_t			full;
+	uint16_t			full;
 }						t_metahead;
 
 typedef struct			s_metabody
@@ -95,5 +98,8 @@ int						get_rlimit(const size_t zu);
 size_t					get_page(const size_t zu);
 uint16_t				get_flag(const size_t zu);
 uint16_t				get_block(const size_t zu);
+
+t_metabody				*metabody_get(const size_t zu);
+void					*ptr_get(t_metabody *b, const size_t zu);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   metabody_get.c                                     :+:      :+:    :+:   */
+/*   metabody_malloc_get.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:11:22 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/09 23:20:48 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/10 14:31:49 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 #include <sys/mman.h>
 #include <sys/resource.h>
 
-
 #include <stdio.h>
-
-
 
 /*
 ** Create a metadata page of the requested type.
@@ -89,6 +86,7 @@ static t_metabody	*metabody_set(t_metahead *head,
 	data = (t_metadata *)(head->container);
 	body = (t_metabody *)&((data->body)[index]);
 	body->head = head;
+	body->index = index;
 	body->address = elem;
 	body->id = get_flag(size);
 	(head->id)[index] = body->id;
@@ -97,35 +95,36 @@ static t_metabody	*metabody_set(t_metahead *head,
 }
 
 static t_metahead	*metahead_find(const t_metadata *start,
-									const size_t size,
+									const uint16_t flag,
 									size_t *index)
 {
 	t_metahead	*iter;
 	size_t		i;
-	size_t		flag;
 
-	flag = get_flag(size);
 	if (start == NULL || flag == Z12)
 		return (NULL);
 	iter = (t_metahead *)&((start->head).data);
 	while (iter)
 	{
-		i = 0;
-		while (i < AVAILABLE)
+		if (iter->available_heap)
 		{
-			if ((iter->id)[i] == flag && ((iter->full) & (1 << i)) == 0)
+			i = 0;
+			while (i < AVAILABLE)
 			{
-				*index = i;
-				return (iter);
+				if ((iter->id)[i] == flag && ((iter->full) & (1 << i)) == 0)
+				{
+					*index = i;
+					return (iter);
+				}
+				++i;
 			}
-			++i;
 		}
 		iter = iter->next;
 	}
 	return (NULL);
 }
 
-static t_metabody	*metabody_get(const size_t size)
+t_metabody		*metabody_get(const size_t size)
 {
 	t_metahead	*head;
 	t_metabody	*body;
@@ -133,9 +132,9 @@ static t_metabody	*metabody_get(const size_t size)
 	size_t		index;
 
 	index = 0;
-	if ((head = metahead_find(g_metadata, size, &index)))
+	if ((head = metahead_find(g_metadata, get_flag(size), &index)))
 	{
-		data = (t_metadata *)&(head->container);
+		data = (t_metadata *)(head->container);
 		return ((t_metabody *)&((data->body)[index]));
 	}
 	if (!(head = metahead_find(g_metadata, 0, &index)))
@@ -148,6 +147,7 @@ static t_metabody	*metabody_get(const size_t size)
 	return (metabody_set(head, size, index));
 }
 
+/*
 int main(void)
 {
 	size_t	i;
@@ -157,11 +157,13 @@ int main(void)
 	i = 0;
 	j = 0;
 	m[i++] = metabody_get(16);
+	m[i++] = metabody_get(16);
 	m[i++] = metabody_get(32);
 	m[i++] = metabody_get(64);
 	m[i++] = metabody_get(128);
 	m[i++] = metabody_get(256);
 	m[i++] = metabody_get(512);
+	m[i++] = metabody_get(32);
 	m[i++] = metabody_get(1024);
 	m[i++] = metabody_get(2048);
 	m[i++] = metabody_get(2049);
@@ -172,6 +174,7 @@ int main(void)
 	m[i++] = metabody_get(2049);
 	m[i++] = metabody_get(2049);
 	m[i++] = metabody_get(2049);
+	m[i++] = metabody_get(32);
 	while (j < i)
 	{
 		printf("%2zu. %p\n", j, m[j]);
@@ -179,3 +182,4 @@ int main(void)
 	}
 	return (0);
 }
+*/

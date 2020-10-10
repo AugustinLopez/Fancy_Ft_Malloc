@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:11:22 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/09 21:39:04 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/10 14:47:50 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,10 @@ size_t		get_page(const size_t size)
 		i *= 32;
 	else if (size <= Z11)
 		i *= 64;
+	else if (size % i)
+		i *= (size / i) + 1;
 	else
-		i = size;
+		i *= (size / i);
 	return(i);
 }
 
