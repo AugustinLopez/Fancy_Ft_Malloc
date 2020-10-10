@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:11:22 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/10 15:52:40 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/11 00:26:39 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,13 @@ static t_metabody	*metabody_set(t_metahead *head,
 		return (NULL);
 	data = (t_metadata *)(head->container);
 	body = (t_metabody *)&((data->body)[index]);
+	head->available_heap -= 1;
 	body->head = head;
 	body->index = index;
 	body->address = elem;
 	body->id = get_flag(size);
 	(head->id)[index] = body->id;
-	body->available_block = get_block(size);
+	body->block_count = 1;
 	return (body);
 }
 
@@ -126,15 +127,18 @@ static t_metahead	*metahead_find(const t_metadata *start,
 
 t_metabody		*metabody_get(const size_t size)
 {
-	t_metahead	*head;
 	t_metadata	*data;
+	t_metahead	*head;
+	t_metabody	*body;
 	size_t		index;
 
 	index = 0;
 	if ((head = metahead_find(g_metadata, get_flag(size), &index)))
 	{
 		data = (t_metadata *)(head->container);
-		return ((t_metabody *)&((data->body)[index]));
+		body = (t_metabody *)&((data->body)[index]);
+		body->block_count -= 1;
+		return (body);
 	}
 	if (!(head = metahead_find(g_metadata, 0, &index)))
 	{
@@ -145,40 +149,3 @@ t_metabody		*metabody_get(const size_t size)
 	}
 	return (metabody_set(head, size, index));
 }
-
-/*
-int main(void)
-{
-	size_t	i;
-	size_t	j;
-	t_metabody	*m[30];
-
-	i = 0;
-	j = 0;
-	m[i++] = metabody_get(16);
-	m[i++] = metabody_get(16);
-	m[i++] = metabody_get(32);
-	m[i++] = metabody_get(64);
-	m[i++] = metabody_get(128);
-	m[i++] = metabody_get(256);
-	m[i++] = metabody_get(512);
-	m[i++] = metabody_get(32);
-	m[i++] = metabody_get(1024);
-	m[i++] = metabody_get(2048);
-	m[i++] = metabody_get(2049);
-	m[i++] = metabody_get(2049);
-	m[i++] = metabody_get(2049);
-	m[i++] = metabody_get(2049);
-	m[i++] = metabody_get(2049);
-	m[i++] = metabody_get(2049);
-	m[i++] = metabody_get(2049);
-	m[i++] = metabody_get(2049);
-	m[i++] = metabody_get(32);
-	while (j < i)
-	{
-		printf("%2zu. %p\n", j, m[j]);
-		j++;
-	}
-	return (0);
-}
-*/

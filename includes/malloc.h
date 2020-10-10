@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:59:43 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/10 16:08:58 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/11 00:33:00 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct			s_metabody
 {
 	uint16_t			id;
 	uint16_t			index;
-	uint16_t			available_block;
+	uint16_t			block_count;
 	void				*address;
 	t_metahead			*head;
 	uint8_t				free[32];
@@ -104,5 +104,8 @@ void					*ptr_get(t_metabody *b, const size_t zu);
 
 void					*mono_malloc(const size_t zu);
 void					*malloc(const size_t zu);
+
+void					mono_free(void *p);
+void					free(void *p);
 
 #endif

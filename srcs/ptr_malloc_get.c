@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 01:08:55 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/10 15:52:26 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/11 00:25:33 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,10 @@ void	head_set(t_metabody *body)
 {
 	t_metahead	*head;
 
-	body->available_block -= 1;
+	body->block_count += 1;
 	head = (t_metahead *)(body->head);
-	if (body->available_block == 0)
+	if ((body->id == Z4 && body->block_count == 256)
+		|| (body->id != Z4 && body->block_count == 128))
 		head->full |= (1 << body->index);
 }
 
