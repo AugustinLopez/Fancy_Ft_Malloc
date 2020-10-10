@@ -6,12 +6,11 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 22:07:43 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/11 00:32:29 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/11 00:58:56 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "minilibft.h"
 
 int	main(void)
 {
@@ -23,7 +22,6 @@ int	main(void)
 	{
 		addr = (char *)malloc(1024);
 		addr[0] = 42;
-		ft_printf("%p\n", addr);
 		free(addr);
 		i++;
 	}

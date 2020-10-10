@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:11:22 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/11 00:26:39 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/11 00:55:34 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ t_metabody		*metabody_get(const size_t size)
 	{
 		data = (t_metadata *)(head->container);
 		body = (t_metabody *)&((data->body)[index]);
-		body->block_count -= 1;
+		body->block_count += 1;
 		return (body);
 	}
 	if (!(head = metahead_find(g_metadata, 0, &index)))

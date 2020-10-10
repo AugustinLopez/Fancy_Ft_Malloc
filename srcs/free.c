@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 18:48:29 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/11 00:30:35 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/11 00:45:16 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int			metabody_islast(t_metabody *body)
 		{
 			if ((iter->id)[i] == body->id)
 				++j;
-			if (j < 1)
+			if (j > 1)
 				return (1);
 			++i;
 		}
@@ -88,6 +88,7 @@ t_metabody	*metabody_find(void *ptr, t_metadata *start)
 			&& (uintptr_t)ptr < (uintptr_t)(body->address) + offset_get(body)
 			&& ((uintptr_t)ptr % body->id) == 0))
 				return (body);
+			i++;
 		}
 		head = head->next;
 	}
@@ -101,7 +102,7 @@ void	metabody_free(t_metabody *body)
 	t_metahead	*head;
 	size_t		index;
 
-	if (body->block_count == 0 && (body->id == Z12 || metabody_islast(body)))
+	if (body->block_count == 0 && (body->id == Z12 || metabody_islast(body) == 1))
 	{
 		head = body->head;
 		index = body->index;

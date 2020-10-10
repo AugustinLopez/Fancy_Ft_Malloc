@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:59:43 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/11 00:33:00 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/11 00:51:20 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ t_metabody				*metabody_get(const size_t zu);
 void					*ptr_get(t_metabody *b, const size_t zu);
 
 void					*mono_malloc(const size_t zu);
-void					*malloc(const size_t zu);
+//void					*malloc(const size_t zu);
 
 void					mono_free(void *p);
-void					free(void *p);
+//void					free(void *p);
 
 #endif
