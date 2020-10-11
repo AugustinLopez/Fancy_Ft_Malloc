@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 01:29:30 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/11 02:24:20 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/12 00:13:59 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	log_malloc(t_metabody *body, void *ptr, size_t size)
 	fd = fd_get();
 	if (fd == -1)
 		return (1);
-	ft_dprintf(fd, "Malloc %zu: %p (N-%zu)\n", size, ptr, body->block_count);
+	ft_dprintf(fd, "Malloc %4zu: %p (N-%zu)\n", size, ptr, body->block_count);
 	return (0);
 }
 
@@ -67,6 +67,6 @@ int	log_free(t_metabody *body, void *ptr)
 	fd = fd_get();
 	if (fd == -1)
 		return (1);
-	ft_dprintf(fd, "Free: %p (N-%zu)\n", ptr, body->block_count);
+	ft_dprintf(fd, "Free:        %p (N-%zu)\n", ptr, body->block_count);
 	return (0);
 }

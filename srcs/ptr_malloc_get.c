@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 01:08:55 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/11 00:25:33 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/12 00:05:10 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,22 @@ void	size_set(t_metabody *body, const size_t size, const size_t i)
 	if (body->id == Z4)
 	{
 		(body->size)[i / 2] &= 0xf0 >> (4 * (i % 2));
-		(body->size)[i / 2] |= size << (4 * (i % 2));
+		(body->size)[i / 2] |= (size - 1) << (4 * (i % 2));
 	}
-	else if (body->id <= Z10)
-		(body->size)[i] = size;
-	else if (body->id == Z11)
+	else if (body->id <= Z8)
+		(body->size)[i] = size - 1;
+	else if (body->id <= Z11)
 	{
-		body->size[i] = size >> 4;
+		body->size[i] = (size - 1) >> 4;
 		(body->store)[i / 2] &= 0xf0 >> (4 * (i % 2));
-		(body->store)[i / 2] |= (size & 0xf) << (4 * (i % 2));
+		(body->store)[i / 2] |= ((size - 1) & 0xf) << (4 * (i % 2));
 	}
 	else
 	{
-		*((size_t *)(body->size)) = size;
+		*((size_t *)(body->size)) = size - 1;
 		*((size_t *)(body->store)) = (size / getpagesize()) * getpagesize();
 		if (size % getpagesize())
 			*((size_t *)(body->store)) += getpagesize();
-		//printf("%zu\n", *((size_t *)(body->store)));
 	}
 }
 
@@ -88,7 +87,7 @@ void	*ptr_get(t_metabody *body, const size_t size)
 {
 	ssize_t	i;
 
-	if (body->id == Z12)
+	if (body->id == ZLARGE)
 	{
 		size_set(body, size, 0);
 		head_set(body);

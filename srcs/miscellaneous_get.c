@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:11:22 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/10 14:47:50 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/11 17:28:47 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ uint16_t	get_block(const size_t size)
 {
 	if (size == 0)
 		return (0);
-	if (size <= 16)
+	if (size <= Z4)
 		return (256);
-	if (size <= 2048)
+	if (size <= Z11)
 		return (128);
 	return(1);
 }
@@ -53,7 +53,7 @@ uint16_t	get_flag(const size_t size)
 		return (Z10);
 	if (size <= Z11)
 		return (Z11);
-	return(Z12);
+	return(ZLARGE);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 18:48:29 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/11 02:22:17 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/11 17:19:15 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 size_t		offset_get(t_metabody *body)
 {
-	if (body->id == Z12)
+	if (body->id == ZLARGE)
 		return (*((size_t *)(body->store)));
 	else if (body->id == Z4)
 		return (body->id * 256);
@@ -29,7 +29,7 @@ void		metablock_free(t_metabody *body, const void *ptr)
 {
 	size_t	index;
 
-	if (body->id == Z12)
+	if (body->id == ZLARGE)
 		body->block_count = 0;
 	else
 	{
@@ -49,7 +49,7 @@ int			metabody_islast(t_metabody *body)
 	size_t		j;
 
 	j = 0;
-	if (body->id == Z12)
+	if (body->id == ZLARGE)
 		return (0);
 	iter = (t_metahead *)&(body->head);
 	while (iter)
@@ -83,7 +83,7 @@ t_metabody	*metabody_find(void *ptr, t_metadata *start)
 		while (i < AVAILABLE)
 		{
 			body = (t_metabody *)&((data->body)[i]);
-			if ((body->id == Z12 && ptr == body->address)
+			if ((body->id == ZLARGE && ptr == body->address)
 			|| (ptr >= body->address
 			&& (uintptr_t)ptr < (uintptr_t)(body->address) + offset_get(body)
 			&& ((uintptr_t)ptr % body->id) == 0))
@@ -102,11 +102,11 @@ void	metabody_free(t_metabody *body)
 	t_metahead	*head;
 	size_t		index;
 
-	if (body->block_count == 0 && (body->id == Z12 || metabody_islast(body) == 1))
+	if (body->block_count == 0 && (body->id == ZLARGE || metabody_islast(body) == 1))
 	{
 		head = body->head;
 		index = body->index;
-		if (body->id == Z12)
+		if (body->id == ZLARGE)
 			munmap(body->address, *((size_t *)(body->store)));
 		else
 			munmap(body->address, get_page(body->id));
