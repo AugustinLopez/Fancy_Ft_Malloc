@@ -18,12 +18,12 @@
 ** 000000 --  00007F : 0xxxxxxx
 ** 000080 --  0007FF : 110xxxxx 10xxxxxx
 ** 000800 --  00FFFF : 1110xxxx 10xxxxxx 10xxxxxx
-** 010000 --  1FFFFF : 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+** 010000 --  10FFFF : 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
 **
 **      0 --     127 : 0aaaaaaa
 **    128 --    2047 : 00000aaa aabbbbbb
 **   2048 --   65535 : aaaabbbb bbcccccc
-**  65536 -- 2097151 : 000aaabb bbbbcccc ccdddddd
+**  65536 -- 1114111 : 000aaabb bbbbcccc ccdddddd
 ** -----------------------------------------------------------------------------
 ** MB_CUR_MAX = Max number of byte to represent a wide character.
 ** It is possible that MB_CUR_MAX = 1, meaning no wide character.
