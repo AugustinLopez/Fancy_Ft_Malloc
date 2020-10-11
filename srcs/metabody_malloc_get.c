@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:11:22 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/11 00:55:34 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/11 02:08:38 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 ** Create a metadata page of the requested type.
 ** If any error occur, return NULL.
 */
+
+#include  "minilibft.h"
 
 static t_metadata	*metadata_set(void)
 {
@@ -39,6 +41,7 @@ static t_metadata	*metadata_set(void)
 	head = &((elem->head).data);
 	head->container = elem;
 	head->available_heap = AVAILABLE;
+	log_metadata_set(elem);
 	return (elem);
 }
 
@@ -91,7 +94,8 @@ static t_metabody	*metabody_set(t_metahead *head,
 	body->address = elem;
 	body->id = get_flag(size);
 	(head->id)[index] = body->id;
-	body->block_count = 1;
+	body->block_count = 0;
+	log_metabody_set(body, head);
 	return (body);
 }
 
@@ -104,7 +108,7 @@ static t_metahead	*metahead_find(const t_metadata *start,
 
 	if (start == NULL || flag == Z12)
 		return (NULL);
-	iter = (t_metahead *)&((start->head).data);
+	iter = (t_metahead *)&(start->head);
 	while (iter)
 	{
 		if (iter->available_heap)
@@ -137,7 +141,6 @@ t_metabody		*metabody_get(const size_t size)
 	{
 		data = (t_metadata *)(head->container);
 		body = (t_metabody *)&((data->body)[index]);
-		body->block_count += 1;
 		return (body);
 	}
 	if (!(head = metahead_find(g_metadata, 0, &index)))

@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 18:48:29 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/11 00:45:16 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/11 02:22:17 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ void	mono_free(void *ptr)
 	metabody_free(body);
 	if (head->available_heap == AVAILABLE && head->container != g_metadata)
 		metadata_free(head);
+	log_free(body, ptr);
 }
 
 void	free(void *ptr)

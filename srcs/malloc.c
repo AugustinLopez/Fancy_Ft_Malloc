@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 17:51:21 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/11 00:53:43 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/11 02:16:06 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ void	*mono_malloc(size_t size)
 {
 	void		*ret;
 	t_metabody	*body;
-	//static size_t	j = 0;
+	static size_t	j = 0;
 
+	(void)j;
 	if (size == 0)
 		return (NULL);
 	body = metabody_get(size);
 	if (body == NULL)
 		return (NULL);
 	ret = ptr_get(body, size);
-	ft_printf("%p\n", ret);
 	if (ret == NULL)
 		return (NULL);
-	//ft_printf("%3zu. %p %p\n", j++, (void *)body, ret);
+	log_malloc(body, ret, size);
 	return (ret);
 }
 
