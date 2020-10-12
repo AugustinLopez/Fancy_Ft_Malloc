@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 17:51:21 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/11 02:16:06 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/12 22:40:56 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ void	*mono_malloc(size_t size)
 {
 	void		*ret;
 	t_metabody	*body;
-	static size_t	j = 0;
 
-	(void)j;
+	(void)get_env();
 	if (size == 0)
 		return (NULL);
 	body = metabody_get(size);
@@ -31,6 +30,22 @@ void	*mono_malloc(size_t size)
 		return (NULL);
 	log_malloc(body, ret, size);
 	return (ret);
+}
+
+#include <stdlib.h>
+int		get_env(void)
+{
+	static int flag = 0;
+
+	if (flag == 0)
+	{
+		if (getenv(ENV_ZONE_TXT))
+			flag |= ENV_ZONE;
+		if (getenv(ENV_LOG_TXT))
+			flag |= ENV_LOG;
+		flag |= 1;
+	}
+	return (flag);
 }
 
 void	*malloc(size_t size)

@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:11:22 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/11 17:19:37 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/12 17:11:35 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ static t_metahead	*metahead_find(const t_metadata *start,
 	t_metahead	*iter;
 	size_t		i;
 
+
 	if (start == NULL || flag == ZLARGE)
 		return (NULL);
 	iter = (t_metahead *)&(start->head);
@@ -116,6 +117,8 @@ static t_metahead	*metahead_find(const t_metadata *start,
 			i = 0;
 			while (i < AVAILABLE)
 			{
+			//	if ((iter->id)[i] == 0)
+			//		log_debug(((iter->full) & (1 << i)), "Debug full", iter);
 				if ((iter->id)[i] == flag && ((iter->full) & (1 << i)) == 0)
 				{
 					*index = i;

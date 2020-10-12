@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:59:43 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/12 00:05:26 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/12 22:39:55 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <pthread.h>
 # include <stdint.h>
-
 
 /*
 ** - Metadata :
@@ -62,9 +61,21 @@
 # define ZMAX Z11
 # define ZLARGE 2049
 
+# define TINY Z8
+# define SMALL Z10
+
 # define AVAILABLE 15
+# define MASK_AVAILABLE 0xf
 # define MAX_Z4 32
 # define MAX_OTHER 16
+
+# define ZONE_BONUS 0
+# define LOG_MEMORY 1
+
+# define ENV_ZONE_TXT "FtMallocZone"
+# define ENV_LOG_TXT "FtMallocLog"
+# define ENV_ZONE (1 << 1)
+# define ENV_LOG (1 << 2)
 
 /*
 ** - We use union to enforce alignment.
@@ -75,6 +86,13 @@
 */
 
 typedef uint8_t			t_256bytes[256];
+
+typedef enum			e_error
+{
+	ERR_FREE_INVALID,
+	ERR_FREE_DOUBLE,
+	ERR_FREE_MUNMAP
+}						t_error;
 
 typedef struct			s_metahead
 {
@@ -125,14 +143,20 @@ int						get_rlimit(const size_t zu);
 size_t					get_page(const size_t zu);
 uint16_t				get_flag(const size_t zu);
 uint16_t				get_block(const size_t zu);
+int						get_env(void);
 
 t_metabody				*metabody_get(const size_t zu);
+t_metabody				*metabody_find(const void *p, t_metadata *d);
 void					*ptr_get(t_metabody *b, const size_t zu);
 
 int						log_metadata_set(t_metadata *d);
 int						log_metabody_set(t_metabody *b, t_metahead *h);
 int						log_malloc(t_metabody *b, void *p, size_t zu);
-int						log_free(t_metabody *b, void *p);
+int						log_free(void *p, size_t zu);
+int						log_metadata_free(t_metadata *d);
+int						log_metabody_free(t_metabody *b, void *p, t_metahead *h);
+int						log_free_failed(void *p, t_error e);
+int						log_debug(int i, char *s, void *p);
 int						fd_get(void);
 
 void					*mono_malloc(const size_t zu);
@@ -141,4 +165,7 @@ void					*malloc(const size_t zu);
 void					mono_free(void *p);
 void					free(void *p);
 
+void					*realloc(void *p, size_t zu);
+
+void					show_alloc_mem(void);
 #endif

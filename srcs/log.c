@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 01:29:30 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/12 00:13:59 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/12 16:50:39 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	fd_get()
 {
 	static int fd = -2;
 
+	if (LOG_MEMORY == 0)
+		fd = -1;
 	if (fd == -2)
 		fd = open("log_malloc.txt", O_CREAT | O_RDWR | O_TRUNC);
 	return (fd);
@@ -60,13 +62,65 @@ int	log_malloc(t_metabody *body, void *ptr, size_t size)
 	return (0);
 }
 
-int	log_free(t_metabody *body, void *ptr)
+int	log_free(void *ptr, size_t count)
 {
 	int fd;
 
 	fd = fd_get();
 	if (fd == -1)
 		return (1);
-	ft_dprintf(fd, "Free:        %p (N-%zu)\n", ptr, body->block_count);
+	ft_dprintf(fd, "Free:        %p (N-%zu)\n", ptr, count);
 	return (0);
 }
+
+int	log_metabody_free(t_metabody *body, void *ptr, t_metahead *head)
+{
+	int	fd;
+
+	fd = fd_get();
+	if (fd == -1)
+		return (1);
+	ft_dprintf(fd, "[%p] Freed metabody: %p -> %p (%zu left)\n", head->container,
+		(void *)body, ptr, head->available_heap);
+	return (0);
+}
+int log_metadata_free(t_metadata *data)
+{
+	int	fd;
+
+	fd = fd_get();
+	if (fd == -1)
+		return (1);
+	ft_dprintf(fd, "\n>>> Freed metadata: [%p]\n\n", (void *)data);
+	return (0);
+}
+
+int	log_free_failed(void *ptr, t_error error)
+{
+	int	fd;
+
+	fd = fd_get();
+	if (fd == -1)
+		return (1);
+	if (error == ERR_FREE_INVALID)
+		ft_dprintf(fd, "! - Cannot free %p: invalid pointer\n", ptr);
+	else if (error == ERR_FREE_DOUBLE)
+		ft_dprintf(fd, "! - Cannot free %p: double-free\n", ptr);
+	else if (error == ERR_FREE_MUNMAP)
+		ft_dprintf(fd, "!!! -  Invalid munmap on %p\n", ptr);
+	return (0);
+
+}
+
+int log_debug(int i, char *str, void *ptr)
+{
+	int	fd;
+
+	fd = fd_get();
+	if (fd == -1)
+		return (1);
+	ft_dprintf(fd, "%d - %s - %p\n",i,  str, ptr);
+	return (0);
+}
+
+

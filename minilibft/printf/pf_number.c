@@ -6,7 +6,7 @@
 /*   By: aulopez <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 19:11:32 by aulopez           #+#    #+#             */
-/*   Updated: 2019/03/18 10:36:39 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/12 22:00:58 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void				pf_itoa_base(uintmax_t n, int b, t_printf *pf)
 		if (b == 2)
 			pf_buffer_write(pf, (char)pf->flag == 'B' ? "B" : "b", 1);
 		else if (b == 16)
-			pf_buffer_write(pf, ft_strchr("XP", (char)pf->flag) ? "X" : "x", 1);
+			pf_buffer_write(pf, "x", 1);
 	}
 	finish_printf(n, b, s, pf);
 }

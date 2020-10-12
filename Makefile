@@ -6,7 +6,7 @@
 #    By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 13:11:21 by aulopez           #+#    #+#              #
-#    Updated: 2020/10/11 01:40:36 by aulopez          ###   ########.fr        #
+#    Updated: 2020/10/12 21:45:11 by aulopez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ CC_C=$(COMPILER) -shared $(OBJ) -I$(PATH_HDR)
 MALLOC=	extern \
 		malloc \
 		free \
+		realloc \
+		show_alloc_mem \
 		miscellaneous_get \
 		ptr_malloc_get \
 		metabody_malloc_get \

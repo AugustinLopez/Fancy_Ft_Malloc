@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test5.c                                            :+:      :+:    :+:   */
+/*   p_test1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/05 13:04:37 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/12 22:14:03 by aulopez          ###   ########.fr       */
+/*   Created: 2020/10/10 19:11:29 by aulopez           #+#    #+#             */
+/*   Updated: 2020/10/12 15:32:19 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-int main()
+#include <string.h>
+#include <stdio.h>
+int main(void)
 {
-	malloc(1);
-	malloc(8);
-	malloc(9);
-	malloc(16);
-	malloc(32);
-	malloc(64);
-	malloc(128);
-	malloc(129);
-	malloc(256);
-	malloc(512);
-	malloc(1024);
-	malloc(1024 * 2);
-	malloc(1024 * 16);
-	malloc(1024 * 1024);
-	malloc(1024 * 1024 * 16);
-	malloc(1024 * 1024 * 128);
-	show_alloc_mem();
+	void *m[300];
+	size_t	i;
+
+	i = 0;
+	m[i++] = malloc(1024);
+	m[i++] = malloc(1024);
+	m[i++] = malloc(1024);
+	i = 0;
+	free(m[i++]);
+	free(m[i++]);
+	free(m[i++]);
+/*	i = 0;
+	while (i < 30)
+	{
+		m[i] = malloc(1024);
+		memset(m[i], 0xff, 1024);
+		free(m[i]);
+		i++;
+	}*/
 	return (0);
 }
