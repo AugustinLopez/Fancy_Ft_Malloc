@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 01:29:30 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 19:07:33 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 19:34:09 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,3 @@ int			log_metadata_free(t_metadata *data, void *l, void *r)
 		ft_dprintf(fd, "\n>>> Freed metadata: [%p]\n\n", (void *)data);
 	return (0);
 }
-/*
-int			log_metadata_guard(void *r, void *l, int option)
-{
-	int	fd;
-
-	fd = get_fd();
-	if (fd == -1)
-		return (1);
-	if (option == 0)
-		ft_dprintf(fd, "\n>>> Set guard: [%p] [%p]\n\n", r, l);
-	if (option == 1)
-		ft_dprintf(fd, "\n>>> Freed guard: [%p] [%p]\n\n", r, l);
-	return (0);
-}*/

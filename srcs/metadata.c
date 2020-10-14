@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:11:22 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 19:06:12 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 19:34:32 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ static t_metadata	*metadata_set(void)
 	if ((get_env() & ENV_GUARD) != 0)
 	{
 		head->l_protect = temp;
-		head->r_protect = mmap_malloc(getpagesize(),1);
+		head->r_protect = mmap_malloc(getpagesize(), 1);
 		log_metadata_set(elem, head->l_protect, head->r_protect);
 	}
 	else

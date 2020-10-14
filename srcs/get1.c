@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:11:22 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 17:39:34 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 19:33:49 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,24 +101,23 @@ size_t			get_page(const size_t size)
 		return (get_page_no_bonus(size));
 	i = getpagesize();
 	if (size <= Z5)
-		i *= 1;
+		return (i);
 	else if (size <= Z6)
-		i *= 2;
+		return (i * 2);
 	else if (size <= Z7)
-		i *= 4;
+		return (i * 4);
 	else if (size <= Z8)
-		i *= 8;
+		return (i * 8);
 	else if (size <= Z9)
-		i *= 16;
+		return (i * 16);
 	else if (size <= Z10)
-		i *= 32;
+		return (i * 32);
 	else if (size <= Z11)
-		i *= 64;
+		return (i * 64);
 	else if (size <= Z12)
-		i *= 128;
+		return (i * 128);
 	else if (size % i)
-		i *= (size / i) + 1;
+		return (i * ((size / i) + 1));
 	else
-		i *= (size / i);
-	return (i);
+		return (i * (size / i));
 }

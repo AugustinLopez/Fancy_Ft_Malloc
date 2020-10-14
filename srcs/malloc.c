@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 17:51:21 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 18:51:14 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 19:35:38 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	*malloc_ptr(t_metabody *body, const size_t size)
 ** 2. Get a pointer from the metabody
 */
 
-void	*mono_malloc(size_t size)
+void		*mono_malloc(size_t size)
 {
 	void		*ret;
 	t_metabody	*body;
@@ -97,7 +97,7 @@ void	*mono_malloc(size_t size)
 	return (ret);
 }
 
-void	*malloc(size_t size)
+void		*malloc(size_t size)
 {
 	void	*ret;
 

@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 14:18:13 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 18:23:47 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 19:30:41 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ int	get_env(void)
 ** let the system close it when the program end.
 */
 
-int	get_fd()
+int	get_fd(void)
 {
 	static int	fd = -2;
 
-	if ((get_env() & ENV_LOG)== 0)
+	if ((get_env() & ENV_LOG) == 0)
 		fd = -1;
 	if (fd == -2)
 		fd = open("log_malloc.txt", O_CREAT | O_RDWR | O_TRUNC);

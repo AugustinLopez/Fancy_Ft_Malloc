@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 14:29:16 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 17:59:57 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 19:35:05 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ ssize_t	metablock_get_available_index(t_metabody *body)
 	return (-1);
 }
 
-int	metablock_free(t_metabody *body, void *ptr)
+int		metablock_free(t_metabody *body, void *ptr)
 {
 	size_t	index;
 
