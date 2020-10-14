@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:59:43 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 19:07:19 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 19:37:58 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,6 @@ int						log_metabody_set(t_metabody *b, t_metahead *h);
 int						log_malloc(t_metabody *b, void *p, size_t zu);
 int						log_free(void *p, size_t zu);
 int						log_metadata_free(t_metadata *d, void *l, void *r);
-//int						log_metadata_guard(void *r, void *l, int option);
 int						log_metabody_free(t_metabody *b, void *p,
 							t_metahead *h);
 int						log_free_failed(void *p, t_error e);

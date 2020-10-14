@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:11:22 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 18:51:59 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 19:37:33 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "minilibft.h"
 #include <sys/mman.h>
 
-static int	metabody_islast(t_metabody *body)
+static int			metabody_islast(t_metabody *body)
 {
 	t_metahead	*iter;
 	size_t		i;
@@ -40,7 +40,7 @@ static int	metabody_islast(t_metabody *body)
 	return (0);
 }
 
-t_metabody	*metabody_find(const void *ptr, t_metadata *start)
+t_metabody			*metabody_find(const void *ptr, t_metadata *start)
 {
 	t_metadata	*data;
 	t_metahead	*head;
@@ -69,7 +69,7 @@ t_metabody	*metabody_find(const void *ptr, t_metadata *start)
 	return (NULL);
 }
 
-int			metabody_free(t_metabody *body)
+int					metabody_free(t_metabody *body)
 {
 	t_metahead	*head;
 	void		*mem;
@@ -123,7 +123,7 @@ static t_metabody	*metabody_set(t_metahead *head,
 	return (body);
 }
 
-t_metabody		*metabody_get(const size_t size)
+t_metabody			*metabody_get(const size_t size)
 {
 	t_metadata	*data;
 	t_metahead	*head;

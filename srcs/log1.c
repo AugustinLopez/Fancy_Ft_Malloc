@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 01:29:30 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 18:43:21 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 19:30:54 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,4 @@ int			log_mmap_failed(size_t size, t_error error)
 	else if (error == ERR_TOO_LARGE)
 		ft_dprintf(fd, "! - Cannot allocate: %zu is too large\n", size);
 	return (0);
-
 }
