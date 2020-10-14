@@ -6,7 +6,7 @@
 #    By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 13:11:21 by aulopez           #+#    #+#              #
-#    Updated: 2020/10/14 15:47:10 by aulopez          ###   ########.fr        #
+#    Updated: 2020/10/14 18:18:09 by aulopez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,12 @@ MALLOC=	extern \
 		realloc \
 		show_alloc_mem \
 		print \
-		log \
-		get \
-		get_static \
+		log1 \
+		log2_meta \
+		get1 \
+		get2_static \
+		get3_size \
+		mmap \
 		metablock \
 		metabody \
 		metadata

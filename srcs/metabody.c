@@ -6,15 +6,13 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:11:22 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 15:10:39 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 18:51:59 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-#include <unistd.h>
-#include <sys/mman.h>
-#include <sys/resource.h>
 #include "minilibft.h"
+#include <sys/mman.h>
 
 static int	metabody_islast(t_metabody *body)
 {
@@ -42,20 +40,6 @@ static int	metabody_islast(t_metabody *body)
 	return (0);
 }
 
-/*
-** Return the size of a given zone of memory.
-*/
-
-static size_t	get_size_zone(t_metabody *body)
-{
-	if (body->id == ZLARGE)
-		return (*((size_t *)(body->store)));
-	else if (body->id == Z4)
-		return (body->id * 256);
-	else
-		return (body->id * 128);
-}
-
 t_metabody	*metabody_find(const void *ptr, t_metadata *start)
 {
 	t_metadata	*data;
@@ -75,7 +59,7 @@ t_metabody	*metabody_find(const void *ptr, t_metadata *start)
 				return (body);
 			if ((head->id)[i] != ZLARGE && (head->id)[i] != 0
 			&& ptr >= body->address
-			&& (uintptr_t)ptr < (uintptr_t)(body->address) + get_size_zone(body)
+			&& (uintptr_t)ptr < (uintptr_t)(body->address) + get_body_size(body)
 			&& ((uintptr_t)ptr % body->id) == 0)
 				return (body);
 			i++;
@@ -114,7 +98,6 @@ int			metabody_free(t_metabody *body)
 	return (ret);
 }
 
-
 static t_metabody	*metabody_set(t_metahead *head,
 								const size_t size,
 								const size_t index)
@@ -125,12 +108,7 @@ static t_metabody	*metabody_set(t_metahead *head,
 	void		*elem;
 
 	requested = get_page(size);
-	if (get_rlimit(requested) != 0)
-		return (NULL);
-	elem = (void *)mmap(NULL, requested,
-						PROT_READ | PROT_WRITE,
-						MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-	if (elem == MAP_FAILED)
+	if ((elem = mmap_malloc(requested, 0)) == NULL)
 		return (NULL);
 	data = (t_metadata *)(head->container);
 	body = (t_metabody *)&((data->body)[index]);

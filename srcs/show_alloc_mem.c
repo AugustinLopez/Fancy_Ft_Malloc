@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 11:29:59 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 16:02:47 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 17:58:59 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <pthread.h>
 #include <stddef.h>
 
-static void	mono_show_alloc_mem_ex(int option)
+static void	mono_show_alloc_mem(int option)
 {
 	t_metahead	*iter;
 	size_t		total;

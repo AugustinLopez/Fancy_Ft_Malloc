@@ -6,15 +6,19 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 18:48:29 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 14:29:49 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 17:31:46 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 #include <pthread.h>
-#include <stdint.h>
-#include <sys/mman.h>
-#include <unistd.h>
+
+/*
+** 1. Check if the pointer is part of our data
+** 2. Attempt to free pointer.
+** 3. Attempt to free the body associated to the pointer.
+** 4. Attempt to free the metadata associated to the body.
+*/
 
 void		mono_free(void *ptr)
 {

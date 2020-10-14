@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:59:43 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 16:15:11 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 19:07:19 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@
 # define Z9 512
 # define Z10 1024
 # define Z11 2048
-# define ZMAX Z11
-# define ZLARGE 2049
+# define Z12 4096
+# define ZMAX Z12
+# define ZLARGE 4097
 
 # define TINY Z8
 # define SMALL Z10
@@ -77,10 +78,12 @@
 # define ENV_LOG_TXT			"FtMallocLog"
 # define ENV_SCRIBBLE_TXT		"FtMallocScribble"
 # define ENV_PRESCRIBBLE_TXT	"FtMallocPreScribble"
+# define ENV_GUARD_TXT			"FtMallocGuard"
 # define ENV_ZONE			0x2
 # define ENV_LOG			0x4
 # define ENV_SCRIBBLE		0x8
 # define ENV_PRESCRIBBLE	0x10
+# define ENV_GUARD			0x20
 
 /*
 ** - We use union to enforce alignment.
@@ -96,7 +99,10 @@ typedef enum			e_error
 {
 	ERR_FREE_INVALID,
 	ERR_FREE_DOUBLE,
-	ERR_FREE_MUNMAP
+	ERR_FREE_MUNMAP,
+	ERR_RLIMIT,
+	ERR_MMAP,
+	ERR_TOO_LARGE
 }						t_error;
 
 typedef struct			s_metahead
@@ -146,15 +152,17 @@ extern pthread_mutex_t	g_thread_mutex;
 
 uint16_t				get_block(const size_t zu);
 uint16_t				get_flag(const size_t zu);
-int						get_rlimit(const size_t zu);
 size_t					get_page(const size_t zu);
+size_t					get_body_size(t_metabody *b);
+
+void					*mmap_malloc(const size_t zu, int i);
 
 int						get_env(void);
 int						get_fd(void);
 
 ssize_t					metablock_get_available_index(t_metabody *b);
 size_t					metablock_get_size(t_metabody *b, const size_t zu);
-int						metablock_free(t_metabody *b, const void *p);
+int						metablock_free(t_metabody *b, void *p);
 
 t_metabody				*metabody_find(const void *p, t_metadata *d);
 t_metabody				*metabody_get(const size_t zu);
@@ -165,15 +173,16 @@ t_metahead				*metadata_find(const t_metadata *d, const uint16_t f,
 t_metadata				*metadata_add(t_metadata **d);
 int						metadata_free(t_metahead *h, t_metadata *d);
 
-int						log_metadata_set(t_metadata *d);
+int						log_metadata_set(t_metadata *d, void *l, void *r);
 int						log_metabody_set(t_metabody *b, t_metahead *h);
 int						log_malloc(t_metabody *b, void *p, size_t zu);
 int						log_free(void *p, size_t zu);
-int						log_metadata_free(t_metadata *d);
+int						log_metadata_free(t_metadata *d, void *l, void *r);
+//int						log_metadata_guard(void *r, void *l, int option);
 int						log_metabody_free(t_metabody *b, void *p,
 							t_metahead *h);
 int						log_free_failed(void *p, t_error e);
-int						log_debug(int i, char *s, void *p);
+int						log_mmap_failed(size_t zu, t_error e);
 
 void					*mono_malloc(const size_t zu);
 void					*malloc(const size_t zu);

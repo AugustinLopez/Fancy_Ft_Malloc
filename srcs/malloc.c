@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 17:51:21 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 16:14:20 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 18:51:14 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ static void	malloc_set_head(t_metabody *body)
 		head->full |= (1 << body->index);
 }
 
+/*
+** Set and return a pointer from a metabody.
+*/
+
 static void	*malloc_ptr(t_metabody *body, const size_t size)
 {
 	ssize_t		i;
@@ -68,6 +72,11 @@ static void	*malloc_ptr(t_metabody *body, const size_t size)
 	malloc_set_head(body);
 	return (((uint8_t *)(body->address)) + i * body->id);
 }
+
+/*
+** 1. Look for a valid metabody
+** 2. Get a pointer from the metabody
+*/
 
 void	*mono_malloc(size_t size)
 {
@@ -93,7 +102,6 @@ void	*malloc(size_t size)
 	void	*ret;
 
 	pthread_mutex_lock(&g_thread_mutex);
-	(void)get_env();
 	ret = mono_malloc(size);
 	pthread_mutex_unlock(&g_thread_mutex);
 	return (ret);

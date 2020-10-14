@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get.c                                              :+:      :+:    :+:   */
+/*   get1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:11:22 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 15:10:42 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 17:39:34 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 #include <unistd.h>
-#include <sys/resource.h>
 
 /*
-** Return the number of block in a metabody associated to a given memory size.
+** Return the number of address in a metabody associated to a given memory size.
 */
 
 uint16_t		get_block(const size_t size)
@@ -33,16 +32,21 @@ uint16_t		get_block(const size_t size)
 ** Return the flag of a metaboby associated to a given memory size.
 */
 
+static uint16_t	get_flag_no_bonus(const size_t size)
+{
+	if (size <= TINY)
+		return (TINY);
+	if (size <= SMALL)
+		return (SMALL);
+	return (ZLARGE);
+}
+
 uint16_t		get_flag(const size_t size)
 {
 	if (size == 0)
 		return (0);
-	if ((get_env() & ENV_ZONE) == 0 && size <= TINY)
-		return (TINY);
-	if ((get_env() & ENV_ZONE) == 0 && size <= SMALL)
-		return (SMALL);
 	if ((get_env() & ENV_ZONE) == 0)
-		return (ZLARGE);
+		return (get_flag_no_bonus(size));
 	if (size <= Z4)
 		return (Z4);
 	if (size <= Z5)
@@ -59,8 +63,15 @@ uint16_t		get_flag(const size_t size)
 		return (Z10);
 	if (size <= Z11)
 		return (Z11);
+	if (size <= Z12)
+		return (Z12);
 	return (ZLARGE);
 }
+
+/*
+** Return the amount of memory to be reserved for allocation associated to
+** a given memory size.
+*/
 
 static size_t	get_page_no_bonus(const size_t size)
 {
@@ -81,11 +92,6 @@ static size_t	get_page_no_bonus(const size_t size)
 		i *= (size / i);
 	return (i);
 }
-
-/*
-** Return the amount of memory to be reserved for allocation associated to
-** a given memory size.
-*/
 
 size_t			get_page(const size_t size)
 {
@@ -108,25 +114,11 @@ size_t			get_page(const size_t size)
 		i *= 32;
 	else if (size <= Z11)
 		i *= 64;
+	else if (size <= Z12)
+		i *= 128;
 	else if (size % i)
 		i *= (size / i) + 1;
 	else
 		i *= (size / i);
 	return (i);
-}
-
-/*
-** Return 0 if system ressource consumption would still be under limit
-** after a memory allocation.
-*/
-
-int				get_rlimit(const size_t size)
-{
-	struct rlimit	limit;
-
-	if (getrlimit(RLIMIT_AS, &limit) != 0)
-		return (1);
-	if (size > limit.rlim_cur)
-		return (1);
-	return (0);
 }
