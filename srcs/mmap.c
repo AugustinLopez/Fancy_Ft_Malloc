@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:11:22 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 18:52:29 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 19:22:47 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		*mmap_malloc(const size_t requested, int bonus)
 				MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 	else
 		ret = mmap(NULL, requested, PROT_NONE,
-				MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+				MAP_PRIVATE | MAP_ANONYMOUS | MAP_NORESERVE, -1, 0);
 	if (ret == MAP_FAILED)
 	{
 		log_mmap_failed(0, ERR_MMAP);
