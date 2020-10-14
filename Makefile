@@ -6,7 +6,7 @@
 #    By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 13:11:21 by aulopez           #+#    #+#              #
-#    Updated: 2020/10/12 21:45:11 by aulopez          ###   ########.fr        #
+#    Updated: 2020/10/14 15:47:10 by aulopez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,13 @@ MALLOC=	extern \
 		free \
 		realloc \
 		show_alloc_mem \
-		miscellaneous_get \
-		ptr_malloc_get \
-		metabody_malloc_get \
-		log
+		print \
+		log \
+		get \
+		get_static \
+		metablock \
+		metabody \
+		metadata
 LIBFT=	ft_bzero ft_memalloc ft_memccpy ft_memcpy ft_memmove ft_memset \
 		ft_strcat ft_strchr ft_strchri ft_strjoin ft_strlen ft_strncpy \
 		ft_strnew ft_wstrlen ft_wcharlen ft_strcpy

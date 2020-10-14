@@ -6,12 +6,12 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:37:09 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/10 15:56:47 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 14:03:26 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef MINILIBFT_H
+# define MINILIBFT_H
 
 # include <string.h>
 # include <stdint.h>

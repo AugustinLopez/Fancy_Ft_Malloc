@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 12:53:41 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/10 15:28:08 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 14:03:05 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,22 @@
 ** A buffer is used to reduce the number of call to write (performance hungry).
 */
 
-# define F_1LONG	(1 << 16)
-# define F_2LONG	(1 << 17)
-# define F_1SHORT	(1 << 18)
-# define F_2SHORT	(1 << 19)
-# define F_LDBL		(1 << 20)
-# define F_DOT		(1 << 21)
-# define F_MINUS	(1 << 22)
-# define F_PLUS		(1 << 23)
-# define F_ZERO		(1 << 24)
-# define F_SPACE	(1 << 25)
-# define F_SHARP	(1 << 26)
-# define F_QUOTE	(1 << 27)
-# define F_WILDCARD (1 << 28)
-# define F_INTMAX	(1 << 29)
-# define F_SIZE_T	(1 << 30)
-# define F_NEGATIF	(1 << 31)
+# define F_1LONG	0x10000
+# define F_2LONG	0x20000
+# define F_1SHORT	0x40000
+# define F_2SHORT	0x80000
+# define F_LDBL		0x100000
+# define F_DOT		0x200000
+# define F_MINUS	0x400000
+# define F_PLUS		0x800000
+# define F_ZERO		0x1000000
+# define F_SPACE	0x2000000
+# define F_SHARP	0x4000000
+# define F_QUOTE	0x8000000
+# define F_WILDCARD 0x10000000
+# define F_INTMAX	0x20000000
+# define F_SIZE_T	0x40000000
+# define F_NEGATIF	0x80000000
 # define PF_BUFF_SIZE 64
 
 /*

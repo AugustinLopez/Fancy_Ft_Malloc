@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:59:43 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/12 22:39:55 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 16:15:11 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,18 @@
 
 # include <pthread.h>
 # include <stdint.h>
+# include <sys/types.h>
 
 /*
 ** - Metadata :
 **     > 1 Page containing : 1 Head Metadata - 15 Zones Metadata
-**     > 256 bytes aligned / returned memory is allocated separately 
+**     > 256 bytes aligned / returned memory is allocated separately
 **     > Additional metadata page are created as needed
 ** - Zone Size:
 **     > Every Power Of 2 between 16 (TINY) and 2048 (SMALL).
 **     > 256 addresses for 16 bytes, 128 otherwise. Everything is aligned.
 **     > At most 1.0625 bytes of metadata per address below 16.
-       > At most 2.0625 bytes of metadata per address below or equal to 2048.
+**     > At most 2.0625 bytes of metadata per address below or equal to 2048.
 **     > Anything above 2049 is one allocation in a zone. Page aligned.
 **     > 273.067 bytes of metadata per address above 2048.
 ** - Possible development:
@@ -70,12 +71,16 @@
 # define MAX_OTHER 16
 
 # define ZONE_BONUS 0
-# define LOG_MEMORY 1
+# define LOG_MEMORY 0
 
-# define ENV_ZONE_TXT "FtMallocZone"
-# define ENV_LOG_TXT "FtMallocLog"
-# define ENV_ZONE (1 << 1)
-# define ENV_LOG (1 << 2)
+# define ENV_ZONE_TXT			"FtMallocZone"
+# define ENV_LOG_TXT			"FtMallocLog"
+# define ENV_SCRIBBLE_TXT		"FtMallocScribble"
+# define ENV_PRESCRIBBLE_TXT	"FtMallocPreScribble"
+# define ENV_ZONE			0x2
+# define ENV_LOG			0x4
+# define ENV_SCRIBBLE		0x8
+# define ENV_PRESCRIBBLE	0x10
 
 /*
 ** - We use union to enforce alignment.
@@ -139,25 +144,36 @@ typedef struct			s_metadata
 extern t_metadata		*g_metadata;
 extern pthread_mutex_t	g_thread_mutex;
 
+uint16_t				get_block(const size_t zu);
+uint16_t				get_flag(const size_t zu);
 int						get_rlimit(const size_t zu);
 size_t					get_page(const size_t zu);
-uint16_t				get_flag(const size_t zu);
-uint16_t				get_block(const size_t zu);
-int						get_env(void);
 
-t_metabody				*metabody_get(const size_t zu);
+int						get_env(void);
+int						get_fd(void);
+
+ssize_t					metablock_get_available_index(t_metabody *b);
+size_t					metablock_get_size(t_metabody *b, const size_t zu);
+int						metablock_free(t_metabody *b, const void *p);
+
 t_metabody				*metabody_find(const void *p, t_metadata *d);
-void					*ptr_get(t_metabody *b, const size_t zu);
+t_metabody				*metabody_get(const size_t zu);
+int						metabody_free(t_metabody *b);
+
+t_metahead				*metadata_find(const t_metadata *d, const uint16_t f,
+							size_t	*index);
+t_metadata				*metadata_add(t_metadata **d);
+int						metadata_free(t_metahead *h, t_metadata *d);
 
 int						log_metadata_set(t_metadata *d);
 int						log_metabody_set(t_metabody *b, t_metahead *h);
 int						log_malloc(t_metabody *b, void *p, size_t zu);
 int						log_free(void *p, size_t zu);
 int						log_metadata_free(t_metadata *d);
-int						log_metabody_free(t_metabody *b, void *p, t_metahead *h);
+int						log_metabody_free(t_metabody *b, void *p,
+							t_metahead *h);
 int						log_free_failed(void *p, t_error e);
 int						log_debug(int i, char *s, void *p);
-int						fd_get(void);
 
 void					*mono_malloc(const size_t zu);
 void					*malloc(const size_t zu);
@@ -167,5 +183,7 @@ void					free(void *p);
 
 void					*realloc(void *p, size_t zu);
 
+size_t					print_metadata(t_metahead *h, int option);
 void					show_alloc_mem(void);
+void					show_alloc_mem_ex(void);
 #endif

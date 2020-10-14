@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 21:46:44 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/12 12:20:25 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 15:08:25 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include <stdint.h>
 #include <pthread.h>
 #include <unistd.h>
-#include <sys/resource.h>
-#include <sys/mman.h>
 
 static void		*realloc_large(t_metabody *body, size_t size)
 {
@@ -36,21 +34,6 @@ static void		*realloc_large(t_metabody *body, size_t size)
 	else
 		ret = ft_memcpy(ret, body->address, stored);
 	free(body->address);
-/*	requested = get_page(size);
-	if (get_rlimit(requested) != 0)
-		return (NULL);
-	ret = (void *)mmap(NULL, requested, PROT_READ | PROT_WRITE,
-					MAP_PRIVATE | MAP_ANONYMOUS, -1 ,0);
-	if (ret == MAP_FAILED)
-		return (NULL);
-	if (requested < stored)
-		ret = ft_memcpy(ret, body->address, requested);
-	else
-		ret = ft_memcpy(ret, body->address, stored);
-	body->block_count = size;
-	*((size_t *)&(body->store)) = requested;
-	munmap(body->address, stored);
-	body->address = ret;*/
 	return (ret);
 }
 
@@ -71,7 +54,7 @@ static void		*mono_realloc(void *ptr, size_t size)
 		return (NULL);
 	else if (body->id == ZLARGE)
 		return (realloc_large(body, size));
-	else if (size > body->id) //if BONUS, check if below or equal to id / 2
+	else if (size > body->id || size <= body->id / 2)
 	{
 		ret = malloc(size);
 		ret = ft_memcpy(ret, ptr, (body->size)[body->index]);

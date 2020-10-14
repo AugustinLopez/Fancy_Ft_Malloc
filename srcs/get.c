@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miscellaneous_get.c                                :+:      :+:    :+:   */
+/*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:11:22 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/12 22:40:12 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 15:10:42 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** Return the number of block in a metabody associated to a given memory size.
 */
 
-uint16_t	get_block(const size_t size)
+uint16_t		get_block(const size_t size)
 {
 	if (size == 0)
 		return (0);
@@ -26,14 +26,14 @@ uint16_t	get_block(const size_t size)
 		return (256);
 	if (size <= Z11)
 		return (128);
-	return(1);
+	return (1);
 }
 
 /*
 ** Return the flag of a metaboby associated to a given memory size.
 */
 
-uint16_t	get_flag(const size_t size)
+uint16_t		get_flag(const size_t size)
 {
 	if (size == 0)
 		return (0);
@@ -59,10 +59,10 @@ uint16_t	get_flag(const size_t size)
 		return (Z10);
 	if (size <= Z11)
 		return (Z11);
-	return(ZLARGE);
+	return (ZLARGE);
 }
 
-size_t		get_page_no_bonus(const size_t size)
+static size_t	get_page_no_bonus(const size_t size)
 {
 	size_t	i;
 
@@ -87,14 +87,14 @@ size_t		get_page_no_bonus(const size_t size)
 ** a given memory size.
 */
 
-size_t		get_page(const size_t size)
+size_t			get_page(const size_t size)
 {
 	size_t	i;
 
 	if ((get_env() & ENV_ZONE) == 0)
 		return (get_page_no_bonus(size));
 	i = getpagesize();
-	if (size <=Z5)
+	if (size <= Z5)
 		i *= 1;
 	else if (size <= Z6)
 		i *= 2;
@@ -112,7 +112,7 @@ size_t		get_page(const size_t size)
 		i *= (size / i) + 1;
 	else
 		i *= (size / i);
-	return(i);
+	return (i);
 }
 
 /*
@@ -120,7 +120,7 @@ size_t		get_page(const size_t size)
 ** after a memory allocation.
 */
 
-int			get_rlimit(const size_t size)
+int				get_rlimit(const size_t size)
 {
 	struct rlimit	limit;
 
