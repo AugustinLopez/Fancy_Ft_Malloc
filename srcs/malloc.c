@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 17:51:21 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 19:35:38 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/14 19:53:24 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	malloc_set_size(t_metabody *body, const size_t size, const size_t i)
 	}
 	else if (body->id <= Z8)
 		(body->size)[i] = size - 1;
-	else if (body->id <= Z11)
+	else if (body->id <= ZMAX)
 	{
 		body->size[i] = (size - 1) >> 4;
 		(body->store)[i / 2] &= 0xf0 >> (4 * (i % 2));
