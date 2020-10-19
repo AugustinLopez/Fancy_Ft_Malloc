@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 14:18:13 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 19:30:41 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/19 13:39:40 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 ** Calling the getenv function each time is wasteful and could create issue
 ** if the environment were to change between call. We store them in a static
 ** to prevent this issue.
+**
+** Scribble desactivated: it causes crash with the correction script...
 */
 
 int	get_env(void)
@@ -34,8 +36,6 @@ int	get_env(void)
 			flag |= ENV_ZONE;
 		if (getenv(ENV_LOG_TXT))
 			flag |= ENV_LOG;
-		if (getenv(ENV_SCRIBBLE_TXT))
-			flag |= ENV_SCRIBBLE;
 		if (getenv(ENV_PRESCRIBBLE_TXT))
 			flag |= ENV_PRESCRIBBLE;
 		if (getenv(ENV_GUARD_TXT))
