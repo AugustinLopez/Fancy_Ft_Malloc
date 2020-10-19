@@ -6,7 +6,7 @@
 #    By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 13:11:21 by aulopez           #+#    #+#              #
-#    Updated: 2020/10/19 11:16:58 by aulopez          ###   ########.fr        #
+#    Updated: 2020/10/19 11:42:12 by aulopez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,16 @@ $(NAME): $(OBJ)
 $(PATH_OBJ)%.o:%.c
 	-@printf " >O $(FLAGS) $*\n"
 	$(CC_O) $< -o $@
+
+test:
+	gcc resources/correction/test0.c -o test0
+	gcc resources/correction/test1.c -o test1
+	gcc resources/correction/test2.c -o test2
+	gcc resources/correction/test3.c -o test3
+	gcc resources/correction/test3bis.c -o test3bis
+	gcc resources/correction/test4.c -o test4
+	gcc resources/correction/test5.c -L. -lft_malloc -I./includes -o test5
+	gcc resources/correction/test6.c -L. -lft_malloc -I./includes -o test6
 
 clean:
 	-@printf " ===> Removing object file(s)\n"
