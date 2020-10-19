@@ -6,7 +6,7 @@
 #    By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 13:11:21 by aulopez           #+#    #+#              #
-#    Updated: 2020/10/14 18:18:09 by aulopez          ###   ########.fr        #
+#    Updated: 2020/10/19 11:16:58 by aulopez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,9 +65,6 @@ $(NAME): $(OBJ)
 	-@printf " ===> Creating $(LINK)\n"
 	@rm -f $(LINK)
 	@ln -s $(NAME) $(LINK)
-
-test:
-	-@printf "$(SRC)"
 
 $(PATH_OBJ)%.o:%.c
 	-@printf " >O $(FLAGS) $*\n"
