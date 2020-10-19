@@ -1,7 +1,7 @@
 int main(void)
 {
-	void *m[300];
-	size_t	i;
+	void	*m[300];
+	int		i;
 
 	i = 0;
 	while (i < 32)

@@ -6,7 +6,7 @@
 #    By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 13:11:21 by aulopez           #+#    #+#              #
-#    Updated: 2020/10/19 11:42:12 by aulopez          ###   ########.fr        #
+#    Updated: 2020/10/19 12:48:21 by aulopez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,13 @@ test:
 	gcc resources/correction/test4.c -o test4
 	gcc resources/correction/test5.c -L. -lft_malloc -I./includes -o test5
 	gcc resources/correction/test6.c -L. -lft_malloc -I./includes -o test6
+
+p_test:
+	gcc resources/correction/p_test0.c -o p_test0
+	gcc resources/correction/p_test1.c -o p_test1
+	gcc resources/correction/p_test2.c -o p_test2
+	gcc resources/correction/p_test3.c -o p_test3
+	gcc resources/correction/p_test4.c -o p_test4
 
 clean:
 	-@printf " ===> Removing object file(s)\n"

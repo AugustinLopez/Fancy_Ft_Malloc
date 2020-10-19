@@ -1,7 +1,7 @@
 int main(void)
 {
 	void *m[150];
-	size_t	i;
+	int		i;
 
 	i = 0;
 	while (i < 100)

@@ -1,7 +1,7 @@
 int main(void)
 {
-	void *m[30];
-	size_t	i;
+	void	*m[30];
+	int		i;
 
 	i = 0;
 	while (i < 10)
