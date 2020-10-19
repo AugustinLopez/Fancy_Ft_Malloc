@@ -1,6 +1,6 @@
 # Fancy_Ft_Malloc
 
-This project is a **malloc** implementation written using the [42Paris' subject](https://github.com/AugustinLopez/Fancy_Ft_Malloc/blob/main/rcs/en_subject_malloc.pdf) as reference. It is *Fancy* because even if I already had a working one, I decided to remake it entirely. At least it looks good to me.
+This project is a **malloc** implementation written using the [42Paris' subject](https://github.com/AugustinLopez/Fancy_Ft_Malloc/blob/main/resources/en_subject_malloc.pdf) as reference. It is *Fancy* because even if I already had a working one, I decided to remake it entirely. At least it looks good to me.
 
 
 ## The *42 Ways* of doing things
@@ -34,7 +34,7 @@ This model is far from perfect, but I am content with what I could achieve in a 
 
 \* *4096 actually, because it fit in my datastructure without further development*
 
-![My malloc datastructure](https://github.com/AugustinLopez/Fancy_Ft_Malloc/blob/main/rcs/malloc_graph.png)
+![My malloc datastructure](https://github.com/AugustinLopez/Fancy_Ft_Malloc/blob/main/resources/malloc_graph.png)
 
 ## What about fragmentation ?
 
