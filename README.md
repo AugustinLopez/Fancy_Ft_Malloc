@@ -17,8 +17,8 @@ Memory display of my structure:
 
 Several personal environnment variables: 
 - **FtMallocZone**: using every power of 2 between 16 and 4096 for allocation instead of the TINY, SMALL things that the subject ask us to do;
-- **FtMallocLog**: log the state of the malloc datastructure in a .txt file;
-- ~~**FtMallocScribble**: fill the freed zone with 0xAA;~~ Causes crash with correction program
+- **FtMallocLog**: log the state of the malloc datastructure in a .txt file; *Access permissions are not set when created by the program: created file might not have R/W rights*
+- **FtMallocScribble**: fill the freed zone with 0xAA; *Causes crash when used with ./run.sh*
 - **FtMallocPreScribble**: fill a newly allocated zone with 0xAA;
 - **FtMallocGuard**: protect malloc metadata with PROT_NONE pages.
 ```sh
