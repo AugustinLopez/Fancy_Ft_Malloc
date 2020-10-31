@@ -28,12 +28,12 @@ static void		*realloc_large(t_metabody *body, size_t size)
 		body->block_count = size;
 		return (body->address);
 	}
-	ret = malloc(size);
+	ret = mono_malloc(size);
 	if (size < stored)
 		ret = ft_memcpy(ret, body->address, size);
 	else
 		ret = ft_memcpy(ret, body->address, stored);
-	free(body->address);
+	mono_free(body->address);
 	return (ret);
 }
 
@@ -56,9 +56,9 @@ static void		*mono_realloc(void *ptr, size_t size)
 		return (realloc_large(body, size));
 	else if (size > body->id || size <= body->id / 2)
 	{
-		ret = malloc(size);
+		ret = mono_malloc(size);
 		ret = ft_memcpy(ret, ptr, (body->size)[body->index]);
-		free(ptr);
+		mono_free(ptr);
 		return (ptr);
 	}
 	(body->size)[body->index] = size;
