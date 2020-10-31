@@ -10,7 +10,7 @@ My files also follows the current *42 Norms*, which is starting to become debili
 
 ## Features
 Homemade implementation of standard functions:
-- **malloc**, **free** and **realloc**
+- **malloc**, **free**, **calloc** and **realloc**
 
 Memory display of my structure:
 - **show_alloc_mem** / **show_alloc_mem_ex**
