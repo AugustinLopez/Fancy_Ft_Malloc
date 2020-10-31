@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:59:43 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 19:37:58 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/31 12:07:47 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ void					mono_free(void *p);
 void					free(void *p);
 
 void					*realloc(void *p, size_t zu);
+void					*calloc(size_t count, size_t size);
 
 size_t					print_metadata(t_metahead *h, int option);
 void					show_alloc_mem(void);
