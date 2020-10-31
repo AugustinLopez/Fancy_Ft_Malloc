@@ -6,12 +6,24 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 01:29:30 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 19:30:54 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/31 12:20:08 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilibft.h"
 #include "malloc.h"
+
+int			log_attempt(size_t i)
+{
+	int fd;
+
+	fd = get_fd();
+	if (fd == -1)
+		return (1);
+	ft_dprintf(fd, "Malloc attempt: %zu |", i);
+	return (0);
+}
+
 
 int			log_malloc(t_metabody *body, void *ptr, size_t size)
 {
@@ -20,7 +32,8 @@ int			log_malloc(t_metabody *body, void *ptr, size_t size)
 	fd = get_fd();
 	if (fd == -1)
 		return (1);
-	ft_dprintf(fd, "Malloc %4zu: %p (N-%zu)\n", size, ptr, body->block_count);
+	ft_dprintf(fd, "[%p] Malloc %4zu: %p (N-%zu)\n", (void *)body,
+				size, ptr, body->block_count);
 	return (0);
 }
 

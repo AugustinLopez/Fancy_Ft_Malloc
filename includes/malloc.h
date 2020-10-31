@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:59:43 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/31 12:07:47 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/31 12:13:15 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@
 # define SMALL Z10
 
 # define AVAILABLE 15
-# define MASK_AVAILABLE 0xf
+# define MASK_AVAILABLE 0xffff
 # define MAX_Z4 32
 # define MAX_OTHER 16
 
@@ -182,6 +182,7 @@ int						log_metabody_free(t_metabody *b, void *p,
 							t_metahead *h);
 int						log_free_failed(void *p, t_error e);
 int						log_mmap_failed(size_t zu, t_error e);
+int						log_attempt(size_t zu);
 
 void					*mono_malloc(const size_t zu);
 void					*malloc(const size_t zu);
