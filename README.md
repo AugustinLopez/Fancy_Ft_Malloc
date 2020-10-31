@@ -24,6 +24,13 @@ Several personal environnment variables:
 ```sh
 $ export FtMallocZone=1
 ```
+
+To launch a program with this library:
+
+```
+export LD_PRELOAD=[Library_path/libft_malloc.so [program]
+```
+
 ## Datastructure
 
 I wanted my model to handle allocation size between 1 and 2048 bytes with as little metadata as possible, using hypothesis that are largely shared among computer (but not portable according to the C Standard). 
@@ -39,3 +46,8 @@ This model is far from perfect (especially with large allocation), but I am cont
 ## What about fragmentation ?
 
 If I want to keep my metadata segregated from my actual allocation while keeping memory alignment, I don't think fragmentation is a good solution until an allocation of more than half a page (2049 bytes on system I care about). This is beyond the scope of what I need/want to do.
+
+## Other issues
+
+Library does not seems to work with `vim`, `bash`, `zsh`, stopping with a segfault. The thing is, I even tried filling my block with 0 bytes before returning them, so I'm pretty sure that the block I return is valid...
+Using GDB, there seems to be an issue with `__GI_getenv`, Using valgrind, there seems to be an issue with `stpcpy`.
