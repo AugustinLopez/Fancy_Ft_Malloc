@@ -6,7 +6,7 @@
 /*   By: aulopez <aulopez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 15:39:21 by aulopez           #+#    #+#             */
-/*   Updated: 2020/10/14 15:59:36 by aulopez          ###   ########.fr       */
+/*   Updated: 2020/10/31 18:03:59 by aulopez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void		print_dump(void *address, size_t size)
 	while (i < size)
 	{
 		if (((i + 1) % 16) != 0)
-			ft_printf("%02x ", ptr[i]);
+			ft_printf("%02p ", ptr[i]);
 		else
-			ft_printf("%02x\n", ptr[i]);
+			ft_printf("%02p\n", ptr[i]);
 		i++;
 	}
 	if (size % 16 != 0)
@@ -41,7 +41,7 @@ size_t		print_large(t_metabody *body, int option)
 
 	offset = *((size_t *)(body->size)) + 1;
 	address = (uintptr_t)(body->address);
-	ft_printf("%#X - %#X : %zu bytes\n", address, address + offset, offset);
+	ft_printf("%#p - %#p : %zu bytes\n", address, address + offset, offset);
 	if (option != 0)
 		print_dump((void *)address, offset);
 	return (offset);
@@ -62,7 +62,7 @@ size_t		print_allocation(t_metabody *body, size_t max, int option)
 		{
 			offset = metablock_get_size(body, i);
 			address = (uintptr_t)(body->address) + i * body->id;
-			ft_printf("%#X - %#X : %zu bytes\n", address, address + offset,
+			ft_printf("%#p - %#p : %zu bytes\n", (void *)address, address + offset,
 				offset);
 			if (option != 0)
 				print_dump((void *)address, offset);
@@ -81,19 +81,19 @@ void		print_zone(t_metabody *body)
 	if ((get_env() & ENV_ZONE) == 0)
 	{
 		if (flag <= TINY)
-			ft_printf("TINY : %#X\n", (uintptr_t)(body->address));
+			ft_printf("TINY : %#p\n", (uintptr_t)(body->address));
 		else if (flag <= SMALL)
-			ft_printf("SMALL : %#X\n", (uintptr_t)(body->address));
+			ft_printf("SMALL : %#p\n", (uintptr_t)(body->address));
 		else
-			ft_printf("LARGE : %#X\n", (uintptr_t)(body->address));
+			ft_printf("LARGE : %#p\n", (uintptr_t)(body->address));
 	}
 	else
 	{
 		if (flag != ZLARGE)
-			ft_printf("Zone [ %d ] : %#X\n", body->id,
+			ft_printf("Zone [ %d ] : %#p\n", body->id,
 				(uintptr_t)(body->address));
 		else
-			ft_printf("LARGE : %#X\n", (uintptr_t)(body->address));
+			ft_printf("LARGE : %#p\n", (uintptr_t)(body->address));
 	}
 }
 
@@ -117,6 +117,7 @@ size_t		print_metadata(t_metahead *head, int option)
 				total += print_allocation(body, 256, option);
 			else
 				total += print_allocation(body, 128, option);
+
 		}
 		i++;
 	}
