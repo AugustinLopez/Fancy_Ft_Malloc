@@ -35,7 +35,7 @@ LD_PRELOAD=[Library_path]/libft_malloc.so [program]
 
 I wanted my model to handle allocation size between 1 and 2048 bytes with as little metadata as possible, using hypothesis that are largely shared among computer (but not portable according to the C Standard). 
 
-To do so, my model will allocate a zone of memory for every power of 2 between 16 and 2048*, which guarantee that at least 50% of a given memory block is actually used. My zone's metadata fit in 256 bytes, and I can fit 15 of them in a single page (the 256 bytes left are the metadata's ... metadata). I don't have alignment problem, and since my metadata is isolated from the memory allocation, I can protect it against accidental overwrite. I use between 1.025 and 2.025 bytes of metadata by address, largely because I need to keep track of the size of the allocation.
+To do so, my model will allocate a zone of memory for every power of 2 between 16 and 2048*, which guarantee that at least 50% of a given memory block is actually used. My zone's metadata fit in 256 bytes, and I can fit 15 of them in a single page (the 256 bytes left are the metadata's ... metadata). I don't have alignment problem, and since my metadata is isolated from the memory allocation, I can protect it against accidental overwrite. I use between 1.025 and 2.025 bytes of metadata by address, largely because I need to keep track of the size of the allocation for `show_alloc_mem`.
 
 This model is far from perfect (especially with large allocation), but I am content with what I could achieve in a 2 weeks time window. Check the image for the general idea.
 
