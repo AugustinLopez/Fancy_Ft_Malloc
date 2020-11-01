@@ -28,7 +28,7 @@ $ export FtMallocZone=1
 To launch a program with this library:
 
 ```
-export LD_PRELOAD=[Library_path/libft_malloc.so [program]
+LD_PRELOAD=[Library_path]/libft_malloc.so [program]
 ```
 
 ## Datastructure
